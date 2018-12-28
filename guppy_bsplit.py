@@ -1,9 +1,11 @@
+#!/usr/bin/python3
+
 import sys
 import os
 import csv
 import pathlib
+import getopt
 from Bio import SeqIO
-
 
 def touch(path):
     with open(path, 'w'):
@@ -15,30 +17,24 @@ prefix = ''
 summary_file = ''
 
 try:
-	opts, args = getopt.getopt(argv,"hb:f:p:s",["barcodefile=","fastqfile=","prefix","summaryfile"])
+	opts, args = getopt.getopt(sys.argv[1:],"hb:f:p:s:",["barcode=","fastq=","prefix=","summary="])
 except getopt.GetoptError:
-	print('guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>')
+	print('parameter error. usage: guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>')
 	sys.exit(2)
-if(len(sys.argv) < 4):
-        print('not enough parameters\n')
-        print('guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>')
-        sys.exit(3)
 for opt, arg in opts:
 	if opt == '-h':
-		print 'guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>'
+		print('usage: guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>')
 		sys.exit()
-	elif opt in ("-b", "--barcodefile"):
+	elif opt in ("-b", "--barcode"):
 		barcodes_file = arg
-	elif opt in ("-f", "--fastqfile"):
+	elif opt in ("-f", "--fastq"):
 		fastq_file = arg
-        elif opt in ("-p", "--prefix"):
-                fastq_file = arg
-        elif opt in ("-s", "--summaryfile"):
-                fastq_file = arg
-
-#barcodes_file = sys.argv[1]
-#fastq_file = sys.argv[2]
-#prefix = sys.argv[3]
+	elif opt in ("-p", "--prefix"):
+                prefix = arg
+	elif opt in ("-s", "--summary"):
+                summary_file = arg
+	else:
+		assert False, "unhandled option"
 
 read_to_barcode = {}
 my_stats = {}
@@ -53,8 +49,10 @@ with open(barcodes_file) as csvfile:
 			my_stats[row[1]] = 1	
 		read_to_barcode[row[0]] = row[1]
 
-for x in sorted(my_stats):
-	print (x+':'+str(my_stats[x]))
+if(summary_file != ''):
+	with open(summary_file, "w") as summ_file_handle:
+		for x in sorted(my_stats):
+			summ_file_handle.write(x+':'+str(my_stats[x])+'\n')
 
 for x in my_stats:
 	current_barcode = x
