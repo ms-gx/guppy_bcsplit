@@ -3,7 +3,6 @@
 import sys
 import os
 import csv
-import pathlib
 import getopt
 from Bio import SeqIO
 
@@ -52,7 +51,12 @@ def main(argv):
 
 	with open(barcodes_file) as csvfile:
 		readCSV = csv.reader(csvfile, delimiter='\t')
-		next(readCSV)
+		header = ' '.join(next(readCSV))
+		print(header)
+		if('barcode' not in header):
+			print('Barcode file seems to be not valid.')
+			sys.exit(2)
+			
 		for row in readCSV:
 			if row[1] in my_stats:
 				my_stats[row[1]] += 1
