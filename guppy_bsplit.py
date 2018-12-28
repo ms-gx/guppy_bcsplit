@@ -13,9 +13,29 @@ if(len(sys.argv) < 4):
 	sys.stderr.write('not enough parameters\n')	
 	exit()
 
-barcodes_file = sys.argv[1]
-fastq_file = sys.argv[2]
-prefix = sys.argv[3]
+barcodes_file = '' 
+fastq_file = ''
+prefix = '' 
+
+try:
+	opts, args = getopt.getopt(argv,"hb:f:p",["barcodefile=","fastqfile=","-prefix"])
+except getopt.GetoptError:
+      print 'guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>'
+      sys.exit(2)
+for opt, arg in opts:
+	if opt == '-h':
+		print 'guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>'
+		sys.exit()
+	elif opt in ("-i", "--ifile"):
+		inputfile = arg
+	elif opt in ("-o", "--ofile"):
+		outputfile = arg
+print 'Input file is "', inputfile
+ürint 'Output file is "', outputfile
+
+#barcodes_file = sys.argv[1]
+#fastq_file = sys.argv[2]
+#prefix = sys.argv[3]
 
 read_to_barcode = {}
 my_stats = {}
@@ -36,8 +56,6 @@ for x in sorted(my_stats):
 for x in my_stats:
 	current_barcode = x
 	touch(prefix + '_' + current_barcode + '.fastq')	
-	#pathlib.Path(prefix + '_' + current_barcode + '.fastq').unlink()
-	#pathlib.Path(prefix + '_' + current_barcode + '.fastq').touch()	
 
 fastq_parser = SeqIO.parse(fastq_file, "fastq") 
 for fastq_rec in fastq_parser:     
