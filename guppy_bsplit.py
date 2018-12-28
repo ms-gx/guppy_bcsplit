@@ -52,7 +52,6 @@ def main(argv):
 	with open(barcodes_file) as csvfile:
 		readCSV = csv.reader(csvfile, delimiter='\t')
 		header = ' '.join(next(readCSV))
-		print(header)
 		if('barcode' not in header):
 			print('Barcode file seems to be not valid.')
 			sys.exit(2)
