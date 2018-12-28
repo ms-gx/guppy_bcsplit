@@ -9,29 +9,32 @@ def touch(path):
     with open(path, 'w'):
         os.utime(path, None)
 
-if(len(sys.argv) < 4):
-	sys.stderr.write('not enough parameters\n')	
-	exit()
-
-barcodes_file = '' 
+barcodes_file = ''
 fastq_file = ''
-prefix = '' 
+prefix = ''
+summary_file = ''
 
 try:
-	opts, args = getopt.getopt(argv,"hb:f:p",["barcodefile=","fastqfile=","-prefix"])
+	opts, args = getopt.getopt(argv,"hb:f:p:s",["barcodefile=","fastqfile=","prefix","summaryfile"])
 except getopt.GetoptError:
-      print 'guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>'
-      sys.exit(2)
+	print('guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>')
+	sys.exit(2)
+if(len(sys.argv) < 4):
+        print('not enough parameters\n')
+        print('guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>')
+        sys.exit(3)
 for opt, arg in opts:
 	if opt == '-h':
 		print 'guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix>'
 		sys.exit()
-	elif opt in ("-i", "--ifile"):
-		inputfile = arg
-	elif opt in ("-o", "--ofile"):
-		outputfile = arg
-print 'Input file is "', inputfile
-ürint 'Output file is "', outputfile
+	elif opt in ("-b", "--barcodefile"):
+		barcodes_file = arg
+	elif opt in ("-f", "--fastqfile"):
+		fastq_file = arg
+        elif opt in ("-p", "--prefix"):
+                fastq_file = arg
+        elif opt in ("-s", "--summaryfile"):
+                fastq_file = arg
 
 #barcodes_file = sys.argv[1]
 #fastq_file = sys.argv[2]
