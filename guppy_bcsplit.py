@@ -21,11 +21,11 @@ def main(argv):
 	try:
 		opts, args = getopt.getopt(argv,"hb:f:p:s:",["barcode=","fastq=","prefix=","summary="])
 	except getopt.GetoptError:
-		print('parameter error. usage: guppy_bsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix> -s <summary_file (optional)>')
+		print('parameter error. usage: guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix> -s <summary_file (optional)>')
 		sys.exit(2)
 	for opt, arg in opts:
 		if opt == '-h':
-			print('usage: guppy_bsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix> -s <summary_file (optional)>')
+			print('usage: guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix> -s <summary_file (optional)>')
 			sys.exit()
 		elif opt in ("-b", "--barcode"):
 			barcodes_file = arg
@@ -42,7 +42,7 @@ def main(argv):
 			assert False, "unhandled option"
 
 	if(nr_mandatory_args < 3):
-		print('parameter error. usage: guppy_bsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix> -s <summary_file (optional)>')
+		print('parameter error. usage: guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix> -s <summary_file (optional)>')
 		sys.exit(2)
 
 
