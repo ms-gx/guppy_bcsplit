@@ -8,8 +8,7 @@ guppy_bcsplit
 I saw someone on the Nanopore community unsure of how to use the program so these are some install steps that I used. Until ```guppy``` can demultiplex files natively (which should be soon), other programs will have to be used. If you've already run ```guppy_barcoder``` this script will work for you. Thanks to Michael Schmid for making the script.
 
 
-
-I installed guppy_bcsplit in a conda environment and was was having issues with python 3.x so I used ```python 2.7```. ```biopython``` is required for ```guppy_bcsplit``` to function and was designed for ```python2.7``` initially.
+```biopython``` is required for ```guppy_bcsplit``` to function.  I installed guppy_bcsplit in a conda environment but was having issues with python 3.x so I used ```python 2.7``` which,   ```biopython``` was initially designed for.
 
 
 
