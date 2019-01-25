@@ -5,7 +5,7 @@ guppy_bcsplit
 
 ## Installation
 
-I saw someone on the Nanopore community unsure of how to use the program so these are some install steps. Until ```guppy``` can demultiplex files natively (which should be soon), other programs will have to be used. If you've already run ```guppy_barcoder``` this script will work for you. Thanks to Michael Schmid for making the script.
+I saw someone on the Nanopore community unsure of how to use the program so these are some install steps that I used. Until ```guppy``` can demultiplex files natively (which should be soon), other programs will have to be used. If you've already run ```guppy_barcoder``` this script will work for you. Thanks to Michael Schmid for making the script.
 
 
 
@@ -27,7 +27,7 @@ Activate your environment:
 
 ```biopython``` is required for guppy_bcsplit to work since it imports the ```Bio``` module from ```SeqIO```.
 
-I used pip to install this time but I normally will use a conda install
+I used pip to install this time but I normally will use a conda install.
 
 ```pip install biopython```
 
@@ -43,7 +43,7 @@ I like to keep the clone in my environment folder so it's easier for me to find.
 
 
 
-Now to copy the git repository:
+Now copy the git repository:
 
 ```git clone https://github.com/ms-gx/guppy_bcsplit.git```
 
@@ -51,6 +51,10 @@ It's only one python file so you could easily put it anywhere.
 
 Unless you change your PATH you'll have to ```cd``` and execute the script where it's located with ```./guppy_bcsplit.py```:
 
+
+If you have multiple fastq files, you'll need to concatenate them first:
+
+```cat source_folder/*.fastq >> destination_folder/name.fastq``` 
 
 
 ## Commands
@@ -81,4 +85,4 @@ The following commands for guppy_bcsplit are:
 
 
 
-```guppy_bcsplit``` should now demultiplex your barcodes and unclassified ```.fastq``` files and a summary output.
+```guppy_bcsplit``` should now demultiplex your barcodes and unclassified to separate ```.fastq``` files and create a summary output.
