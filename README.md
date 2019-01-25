@@ -84,4 +84,4 @@ The following commands for guppy_bcsplit are:
 
 
 
-```guppy_bcsplit``` should now demultiplex your barcodes and unclassified to separate ```.fastq``` files and create a summary output.
+```guppy_bcsplit``` should now demultiplex your barcodes and unclassified reads to separate ```.fastq``` files and create a summary output.
