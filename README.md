@@ -8,41 +8,10 @@ guppy_bcsplit
 I saw someone on the Nanopore community unsure of how to use the program so these are some install steps that I used. Until ```guppy``` can demultiplex files natively (which should be soon), other programs will have to be used. If you've already run ```guppy_barcoder``` this script will work for you. Thanks to Michael Schmid for making the script.
 
 
-```biopython``` is required for ```guppy_bcsplit``` to function.  I installed guppy_bcsplit in a conda environment but was having issues with ```biopython``` in python 3.x so I used ```python 2.7``` which,   ```biopython``` was initially designed for.
+```biopython``` is required for ```guppy_bcsplit``` as it imports the ```Bio``` module from ```SeqIO``` in ```biopython``` to function. ```guppy_bcsplit``` works in ```python 2.7``` and ```python 3.7.1``` for me.
 
 
-
-Create a new conda environment with python2.7
-
-```conda create --name guppybc python=2.7```
-
-
-
-Activate your environment:
-
-```source activate guppybc```
-
-
-
-```biopython``` is required for guppy_bcsplit to work since it imports the ```Bio``` module from ```SeqIO```.
-
-I used pip to install this time but I normally will use a conda install.
-
-```pip install biopython```
-
-You could try a ```conda install``` instead:
-
-```conda install -c bioconda biopython```
-
-
-
-I like to keep the clone in my environment folder so it's easier for me to find.
-
-```cd ~/miniconda3/envs/guppybc/guppy_bcsplit```
-
-
-
-Now copy the git repository:
+Clone the git repository:
 
 ```git clone https://github.com/ms-gx/guppy_bcsplit.git```
 
