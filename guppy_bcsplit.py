@@ -2,6 +2,7 @@
 
 import sys
 import os
+import time
 import csv
 import getopt
 from Bio import SeqIO
@@ -45,7 +46,7 @@ def main(argv):
 		print('parameter error. usage: guppy_bcsplit.py -b <barcode_file> -f <fastq_file> -p <your_prefix> -s <summary_file (optional)>')
 		sys.exit(2)
 
-
+	starttime = time.time()
 	read_to_barcode = {}
 	my_stats = {}
 
@@ -64,10 +65,13 @@ def main(argv):
 			read_to_barcode[row[0]] = row[1]
 
 	if(summary_file != ''):
+		total_reads = 0
 		with open(summary_file, "w") as summ_file_handle:
 			for x in sorted(my_stats):
 				summ_file_handle.write(x+':'+str(my_stats[x])+'\n')
-
+				total_reads += (my_stats[x]) # Add read count to the total count
+			summ_file_handle.write('Total reads:'+ str(total_reads))
+				
 	for x in my_stats:
 		current_barcode = x
 		touch(prefix + '_' + current_barcode + '.fastq')	
@@ -78,6 +82,18 @@ def main(argv):
 		current_barcode = read_to_barcode[read_name]
 		with open(prefix + '_' + current_barcode + '.fastq', 'a') as fastq_handle:
 			SeqIO.write(fastq_rec, fastq_handle, "fastq")
+
+	endtime = time.time()
+
+ 	if(summary_file != ''):
+		with open(summary_file, "a+") as summ_file_handle:
+			summ_file_handle.write('\n'+'Finished sorting in {0:.0f} seconds.'.format(endtime - starttime)) # Writes the time it took to demultiplex the files
+			summ_file_handle.seek(0) # Go back to the beginning so it can be read
+			print(summ_file_handle.read())
+
+ 	else:
+		print('Finished sorting in {0:.0f} seconds.'.format(endtime - starttime))
+
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
