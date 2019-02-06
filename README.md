@@ -1,5 +1,7 @@
 [![Python](https://img.shields.io/badge/Python-3.5-green.svg?style=flat-square)](/)
 
+Someone wrote this manual for my small bcsplit script. I justed merged into my readme. Thanks, stranger :-)
+
 guppy_bcsplit
 ===============
 
